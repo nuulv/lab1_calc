@@ -1,14 +1,17 @@
 package lab1_calc;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 import javax.swing.*;
 
 public class MainWindow {
     private JPanel panel1;
-    private JTextField textField1;
-    private JComboBox comboBox1;
-    private JTextField textField2;
+    private JTextField lewyTextField;
+    private JComboBox dzialanieComboBox;
+    private JTextField prawyTextField;
     private JButton obliczButton;
-    private JTextField textField3;
+    private JTextField wynikTextField;
+    private JLabel opis;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("MainWindow");
@@ -31,6 +34,31 @@ public class MainWindow {
     }
 
     public MainWindow() {
-        comboBox1.setModel(new DefaultComboBoxModel(Dzialania.values()));
+        opis.setText(String.format("Do pól tekstowych należy wprowadzić liczby z zakresu od %d do %d", Range.min, Range.max));
+        dzialanieComboBox.setModel(new DefaultComboBoxModel(Dzialania.values()));
+        obliczButton.addActionListener(e -> obliczButtonAction());
+
+        lewyTextField.setInputVerifier(new MyInputVerifier());
+        prawyTextField.setInputVerifier(new MyInputVerifier());
+    }
+
+    private void obliczButtonAction() {
+        float a = NumberUtils.toFloat(lewyTextField.getText(), 0);
+        float b = NumberUtils.toFloat(prawyTextField.getText(), 0);
+
+        switch ((Dzialania)dzialanieComboBox.getSelectedItem()){
+            case DODAWANIE:
+                wynikTextField.setText( String.format("%f", a+b) );
+                break;
+            case ODEJMOWANIE:
+                wynikTextField.setText( String.format("%f", a-b) );
+                break;
+            case MNOZENIE:
+                wynikTextField.setText( String.format("%f", a*b) );
+                break;
+            case DZIELENIE:
+                wynikTextField.setText( String.format("%f", a/b) );
+                break;
+        }
     }
 }
