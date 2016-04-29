@@ -10,6 +10,8 @@ public class MyInputVerifier extends InputVerifier implements Range {
     private Border defultborder = null;
     @Override
     public boolean verify(JComponent input) {
+        if ( !(input instanceof JTextField) )
+            return false;
         if (defultborder == null)
             defultborder = input.getBorder();
 

@@ -43,22 +43,25 @@ public class MainWindow {
     }
 
     private void obliczButtonAction() {
-        float a = NumberUtils.toFloat(lewyTextField.getText(), 0);
-        float b = NumberUtils.toFloat(prawyTextField.getText(), 0);
+        if (lewyTextField.getInputVerifier().verify(lewyTextField)
+                && prawyTextField.getInputVerifier().verify(prawyTextField)) {
+            float a = NumberUtils.toFloat(lewyTextField.getText(), 0);
+            float b = NumberUtils.toFloat(prawyTextField.getText(), 0);
 
-        switch ((Dzialania)dzialanieComboBox.getSelectedItem()){
-            case DODAWANIE:
-                wynikTextField.setText( String.format("%f", a+b) );
-                break;
-            case ODEJMOWANIE:
-                wynikTextField.setText( String.format("%f", a-b) );
-                break;
-            case MNOZENIE:
-                wynikTextField.setText( String.format("%f", a*b) );
-                break;
-            case DZIELENIE:
-                wynikTextField.setText( String.format("%f", a/b) );
-                break;
+            switch ((Dzialania) dzialanieComboBox.getSelectedItem()) {
+                case DODAWANIE:
+                    wynikTextField.setText(String.format("%f", a + b));
+                    break;
+                case ODEJMOWANIE:
+                    wynikTextField.setText(String.format("%f", a - b));
+                    break;
+                case MNOZENIE:
+                    wynikTextField.setText(String.format("%f", a * b));
+                    break;
+                case DZIELENIE:
+                    wynikTextField.setText(String.format("%f", a / b));
+                    break;
+            }
         }
     }
 }
